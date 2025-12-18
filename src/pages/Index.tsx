@@ -15,6 +15,11 @@ import product6 from "@/assets/product-6.jpg";
 import product7 from "@/assets/product-7.jpg";
 import product8 from "@/assets/product-8.jpg";
 import product9 from "@/assets/product-9.jpg";
+import product10 from "@/assets/product-10.jpg";
+import product11 from "@/assets/product-11.jpg";
+import product12 from "@/assets/product-12.jpg";
+import product13 from "@/assets/product-13.jpg";
+import product14 from "@/assets/product-14.jpg";
 
 // Product data
 const products = [
@@ -27,6 +32,11 @@ const products = [
   { id: 7, name: "Camel Wool Coat", price: 18999, image: product7 },
   { id: 8, name: "Gray Cashmere Cardigan", price: 7499, image: product8 },
   { id: 9, name: "Terracotta Midi Skirt", price: 4999, image: product9 },
+  { id: 10, name: "Men's Navy Suit Jacket", price: 14999, image: product10 },
+  { id: 11, name: "Men's Oxford Shirt", price: 2999, image: product11 },
+  { id: 12, name: "Men's Slim Fit Chinos", price: 4499, image: product12 },
+  { id: 13, name: "Men's Leather Bomber", price: 16999, image: product13 },
+  { id: 14, name: "Men's Navy Polo", price: 2499, image: product14 },
 ];
 
 const Index = () => {
