@@ -149,7 +149,7 @@ const Index = () => {
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
                     Location
                   </h4>
-                  <p className="text-foreground">Mumbai, Maharashtra, India</p>
+                  <p className="text-foreground">Ahmedabad, Mumbai, Delhi, Kolkata, India</p>
                 </div>
               </div>
             </div>
