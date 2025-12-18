@@ -137,7 +137,7 @@ const Index = () => {
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
                     Email
                   </h4>
-                  <p className="text-foreground">hello@elegance.com</p>
+                  <p className="text-foreground">gaurangjamaliya@gmail.com</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
