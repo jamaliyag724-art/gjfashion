@@ -60,7 +60,7 @@ const Index = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <div className="max-w-xl animate-fade-in-up">
             <p className="text-sm md:text-base tracking-[0.3em] uppercase text-background/80 mb-4">
-              New Collection 2024
+              New Collection 2025
             </p>
             <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-light text-background mb-6 leading-[1.1]">
               Timeless
