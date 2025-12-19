@@ -183,9 +183,8 @@ const Index = () => {
                 </div>
                 <div>
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
-                    Phone
-                  </h4>
-                  <p className="text-foreground">+91 9537248835</p>
+                </h4>
+                  
                 </div>
                 <div>
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
