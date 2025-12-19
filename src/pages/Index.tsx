@@ -22,37 +22,86 @@ import product13 from "@/assets/product-13.jpg";
 import product14 from "@/assets/product-14.jpg";
 
 // Product data
-const products = [
-  { id: 1, name: "Cream Linen Blazer", price: 8999, image: product1 },
-  { id: 2, name: "Black Silk Dress", price: 12999, image: product2 },
-  { id: 3, name: "Classic White Tee", price: 1999, image: product3 },
-  { id: 4, name: "Beige Wool Sweater", price: 5499, image: product4 },
-  { id: 5, name: "Navy Tailored Trousers", price: 6999, image: product5 },
-  { id: 6, name: "Olive Linen Shirt", price: 3999, image: product6 },
-  { id: 7, name: "Camel Wool Coat", price: 18999, image: product7 },
-  { id: 8, name: "Gray Cashmere Cardigan", price: 7499, image: product8 },
-  { id: 9, name: "Terracotta Midi Skirt", price: 4999, image: product9 },
-  { id: 10, name: "Men's Navy Suit Jacket", price: 14999, image: product10 },
-  { id: 11, name: "Men's Oxford Shirt", price: 2999, image: product11 },
-  { id: 12, name: "Men's Slim Fit Chinos", price: 4499, image: product12 },
-  { id: 13, name: "Men's Leather Bomber", price: 16999, image: product13 },
-  { id: 14, name: "Men's Navy Polo", price: 2499, image: product14 },
-];
-
+const products = [{
+  id: 1,
+  name: "Cream Linen Blazer",
+  price: 8999,
+  image: product1
+}, {
+  id: 2,
+  name: "Black Silk Dress",
+  price: 12999,
+  image: product2
+}, {
+  id: 3,
+  name: "Classic White Tee",
+  price: 1999,
+  image: product3
+}, {
+  id: 4,
+  name: "Beige Wool Sweater",
+  price: 5499,
+  image: product4
+}, {
+  id: 5,
+  name: "Navy Tailored Trousers",
+  price: 6999,
+  image: product5
+}, {
+  id: 6,
+  name: "Olive Linen Shirt",
+  price: 3999,
+  image: product6
+}, {
+  id: 7,
+  name: "Camel Wool Coat",
+  price: 18999,
+  image: product7
+}, {
+  id: 8,
+  name: "Gray Cashmere Cardigan",
+  price: 7499,
+  image: product8
+}, {
+  id: 9,
+  name: "Terracotta Midi Skirt",
+  price: 4999,
+  image: product9
+}, {
+  id: 10,
+  name: "Men's Navy Suit Jacket",
+  price: 14999,
+  image: product10
+}, {
+  id: 11,
+  name: "Men's Oxford Shirt",
+  price: 2999,
+  image: product11
+}, {
+  id: 12,
+  name: "Men's Slim Fit Chinos",
+  price: 4499,
+  image: product12
+}, {
+  id: 13,
+  name: "Men's Leather Bomber",
+  price: 16999,
+  image: product13
+}, {
+  id: 14,
+  name: "Men's Navy Polo",
+  price: 2499,
+  image: product14
+}];
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={heroBanner}
-            alt="Fashion hero"
-            className="w-full h-full object-cover"
-          />
+          <img src={heroBanner} alt="Fashion hero" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/20 to-transparent" />
         </div>
 
@@ -70,10 +119,9 @@ const Index = () => {
             <p className="text-base md:text-lg text-background/80 mb-8 max-w-md leading-relaxed">
               Discover our curated collection of sophisticated essentials designed for the modern wardrobe.
             </p>
-            <Button
-              variant="hero"
-              onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+            <Button variant="hero" onClick={() => document.getElementById('products')?.scrollIntoView({
+            behavior: 'smooth'
+          })}>
               Shop Now
             </Button>
           </div>
@@ -102,13 +150,7 @@ const Index = () => {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {products.map((product, index) => (
-              <ProductCard
-                key={product.id}
-                {...product}
-                delay={index * 100}
-              />
-            ))}
+            {products.map((product, index) => <ProductCard key={product.id} {...product} delay={index * 100} />)}
           </div>
         </div>
       </section>
@@ -137,7 +179,7 @@ const Index = () => {
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
                     Email
                   </h4>
-                  <p className="text-foreground">gaurangjamaliya@gmail.com</p>
+                  <p className="text-foreground">gaurangjamaliya67@gmail.com</p>
                 </div>
                 <div>
                   <h4 className="text-sm font-medium tracking-wider uppercase text-muted-foreground mb-1">
@@ -163,8 +205,6 @@ const Index = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
