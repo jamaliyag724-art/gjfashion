@@ -135,6 +135,94 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Categories Section */}
+      <section id="categories" className="py-20 md:py-28 bg-muted">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-16 md:mb-20">
+            <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-3">
+              Explore
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
+              Shop by Category
+            </h2>
+          </div>
+
+          {/* Categories Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+            {[
+              { name: "Blazers & Coats", icon: "👔", count: 24 },
+              { name: "Dresses", icon: "👗", count: 36 },
+              { name: "Shirts & Tops", icon: "👕", count: 48 },
+              { name: "Trousers & Pants", icon: "👖", count: 32 },
+              { name: "Sweaters & Cardigans", icon: "🧥", count: 28 },
+              { name: "Skirts", icon: "🩱", count: 18 },
+            ].map((category, index) => (
+              <div
+                key={category.name}
+                className="group relative bg-card rounded-lg p-6 text-center cursor-pointer hover-lift animate-fade-in-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="text-4xl mb-4">{category.icon}</div>
+                <h3 className="font-heading text-lg font-medium text-foreground mb-1 group-hover:text-primary transition-colors">
+                  {category.name}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {category.count} Items
+                </p>
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20 rounded-lg transition-colors" />
+              </div>
+            ))}
+          </div>
+
+          {/* Additional Category Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            {[
+              { 
+                name: "Men's Collection", 
+                description: "Sophisticated essentials for the modern gentleman",
+                image: product10,
+                items: 45
+              },
+              { 
+                name: "Women's Collection", 
+                description: "Elegant pieces for every occasion",
+                image: product2,
+                items: 62
+              },
+              { 
+                name: "New Arrivals", 
+                description: "Fresh styles just landed",
+                image: product7,
+                items: 28
+              },
+            ].map((collection, index) => (
+              <div
+                key={collection.name}
+                className="group relative overflow-hidden rounded-lg aspect-[4/5] cursor-pointer animate-fade-in-up"
+                style={{ animationDelay: `${(index + 6) * 100}ms` }}
+              >
+                <img
+                  src={collection.image}
+                  alt={collection.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 text-background">
+                  <p className="text-sm text-background/70 mb-1">{collection.items} Items</p>
+                  <h3 className="font-heading text-2xl font-medium mb-2">
+                    {collection.name}
+                  </h3>
+                  <p className="text-sm text-background/80">
+                    {collection.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Products Section */}
       <section id="products" className="py-20 md:py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
