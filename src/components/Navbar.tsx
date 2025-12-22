@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingBag, Heart } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import WishlistSheet from "@/components/WishlistSheet";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,9 +60,7 @@ const Navbar = () => {
 
           {/* Icons (Desktop) */}
           <div className="hidden md:flex items-center space-x-2">
-            <button className="p-2.5 text-foreground hover:text-primary hover:bg-muted rounded-full transition-all duration-300">
-              <Heart className="h-5 w-5" />
-            </button>
+            <WishlistSheet />
             <button className="p-2.5 text-foreground hover:text-primary hover:bg-muted rounded-full transition-all duration-300 relative">
               <ShoppingBag className="h-5 w-5" />
               <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
@@ -72,6 +71,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-2">
+            <WishlistSheet />
             <button className="p-2 text-foreground hover:text-primary transition-colors">
               <ShoppingBag className="h-5 w-5" />
             </button>

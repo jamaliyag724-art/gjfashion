@@ -4,8 +4,9 @@ import { Heart, Eye, ShoppingCart } from "lucide-react";
 import StarRating from "@/components/StarRating";
 import Badge from "@/components/Badge";
 import SizeGuide from "@/components/SizeGuide";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 interface ProductCardProps {
   id: number;
@@ -18,18 +19,15 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, name, price, image, delay = 0, rating = 4.5, badge }: ProductCardProps) => {
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const { toggleItem, isInWishlist } = useWishlist();
 
+  const isWishlisted = isInWishlist(id);
   const sizes = ["XS", "S", "M", "L", "XL"];
 
   const handleWishlist = () => {
-    setIsWishlisted(!isWishlisted);
-    toast({
-      title: isWishlisted ? "Removed from Wishlist" : "Added to Wishlist",
-      description: `"${name}" has been ${isWishlisted ? "removed from" : "added to"} your wishlist.`,
-    });
+    toggleItem({ id, name, price, image, rating });
   };
 
   const handleAddToCart = () => {
@@ -131,6 +129,9 @@ const ProductCard = ({ id, name, price, image, delay = 0, rating = 4.5, badge }:
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="font-heading text-2xl">{name}</DialogTitle>
+            <DialogDescription className="sr-only">
+              Quick view for {name} - ₹{price.toLocaleString('en-IN')}
+            </DialogDescription>
           </DialogHeader>
           <div className="grid md:grid-cols-2 gap-6 mt-4">
             <div className="aspect-[3/4] rounded-lg overflow-hidden bg-muted">
