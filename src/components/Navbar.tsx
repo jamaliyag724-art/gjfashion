@@ -12,12 +12,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <a href="#home" className="flex items-center space-x-2">
-            <span className="font-heading text-2xl md:text-3xl font-semibold tracking-wide text-white">
+            <span className="font-heading text-2xl md:text-3xl font-semibold tracking-wide text-foreground">
               ÉLÉGANCE
             </span>
           </a>
@@ -35,7 +35,7 @@ const Navbar = () => {
                     block: 'start'
                   });
                 }}
-                className="text-sm font-medium tracking-widest uppercase text-white/80 hover:text-white transition-colors duration-300"
+                className="text-sm font-medium tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
               >
                 {link.name}
               </a>
@@ -44,7 +44,7 @@ const Navbar = () => {
 
           {/* Cart Icon (Desktop) */}
           <div className="hidden md:flex items-center">
-            <button className="p-2 text-white hover:text-white/80 transition-colors duration-300">
+            <button className="p-2 text-foreground hover:text-primary transition-colors duration-300">
               <ShoppingBag className="h-5 w-5" />
             </button>
           </div>
@@ -52,7 +52,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-foreground"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
