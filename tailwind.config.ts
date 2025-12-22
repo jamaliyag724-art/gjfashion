@@ -57,6 +57,10 @@ export default {
         "terracotta-dark": "hsl(var(--terracotta-dark))",
         charcoal: "hsl(var(--charcoal))",
         sage: "hsl(var(--sage))",
+        gold: "hsl(var(--gold))",
+        success: "hsl(var(--success))",
+        hot: "hsl(var(--hot))",
+        new: "hsl(var(--new))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -77,6 +81,7 @@ export default {
         soft: "var(--shadow-soft)",
         hover: "var(--shadow-hover)",
         card: "var(--shadow-card)",
+        lg: "var(--shadow-lg)",
       },
       keyframes: {
         "accordion-down": {
