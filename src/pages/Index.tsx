@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 import ContactForm from "@/components/ContactForm";
@@ -8,6 +9,7 @@ import InstagramFeed from "@/components/InstagramFeed";
 import SectionDivider from "@/components/SectionDivider";
 import AboutBrand from "@/components/AboutBrand";
 import ProductFilters from "@/components/ProductFilters";
+import CompleteLook from "@/components/CompleteLook";
 import { Button } from "@/components/ui/button";
 import { Users, ShoppingBag, Shirt, Briefcase } from "lucide-react";
 
@@ -51,14 +53,16 @@ const newArrivals = [
 ];
 
 const categories = [
-  { name: "Men", icon: Users, count: 45 },
-  { name: "Women", icon: ShoppingBag, count: 62 },
-  { name: "Blazers", icon: Briefcase, count: 24 },
-  { name: "Shirts", icon: Shirt, count: 48 },
-  { name: "Trousers", icon: ShoppingBag, count: 32 },
+  { name: "Men", icon: Users, count: 45, slug: "men" },
+  { name: "Women", icon: ShoppingBag, count: 62, slug: "women" },
+  { name: "Blazers", icon: Briefcase, count: 24, slug: "blazers" },
+  { name: "Shirts", icon: Shirt, count: 48, slug: "shirts" },
+  { name: "Trousers", icon: ShoppingBag, count: 32, slug: "trousers" },
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -106,6 +110,7 @@ const Index = () => {
             {categories.map((category, index) => (
               <div
                 key={category.name}
+                onClick={() => navigate(`/shop?category=${category.slug}`)}
                 className="group bg-card rounded-2xl p-6 text-center cursor-pointer shadow-card hover:shadow-lg transition-all duration-500 hover:-translate-y-1 animate-fade-in-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -170,6 +175,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Complete the Look */}
+      <CompleteLook />
 
       {/* Testimonials */}
       <Testimonials />

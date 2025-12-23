@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "@/hooks/use-toast";
 import { useWishlist } from "@/contexts/WishlistContext";
 
-interface ProductCardProps {
+export interface ProductCardProps {
   id: number;
   name: string;
   price: number;
@@ -16,15 +16,16 @@ interface ProductCardProps {
   delay?: number;
   rating?: number;
   badge?: "hot" | "new" | "sale" | "trending";
+  sizes?: string[];
 }
 
-const ProductCard = ({ id, name, price, image, delay = 0, rating = 4.5, badge }: ProductCardProps) => {
+const ProductCard = ({ id, name, price, image, delay = 0, rating = 4.5, badge, sizes: propSizes }: ProductCardProps) => {
   const [showQuickView, setShowQuickView] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const { toggleItem, isInWishlist } = useWishlist();
 
   const isWishlisted = isInWishlist(id);
-  const sizes = ["XS", "S", "M", "L", "XL"];
+  const sizes = propSizes || ["XS", "S", "M", "L", "XL"];
 
   const handleWishlist = () => {
     toggleItem({ id, name, price, image, rating });
