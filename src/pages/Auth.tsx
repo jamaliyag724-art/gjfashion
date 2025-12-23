@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Mail, Lock, User } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import type { User as SupabaseUser, Session } from "@supabase/supabase-js";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Auth = () => {
@@ -15,6 +17,8 @@ const Auth = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [error, setError] = useState("");
   const [shake, setShake] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -22,18 +26,41 @@ const Auth = () => {
     name: "",
   });
 
-  // Check for saved email on mount
+  // Check for saved email and auth state on mount
   useEffect(() => {
     const savedEmail = localStorage.getItem("gj_remembered_email");
     if (savedEmail) {
       setFormData((prev) => ({ ...prev, email: savedEmail }));
     }
 
-    // Check if user is already logged in
-    const isLoggedIn = localStorage.getItem("gj_auth_token");
-    if (isLoggedIn) {
-      navigate("/");
-    }
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // If user just signed in, redirect to home
+        if (event === 'SIGNED_IN' && session) {
+          setShowWelcome(true);
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        }
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      // If already logged in, redirect
+      if (session) {
+        navigate("/");
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [navigate]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,9 +73,6 @@ const Auth = () => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
 
     // Simple validation
     if (!formData.email || !formData.password) {
@@ -67,28 +91,84 @@ const Auth = () => {
       return;
     }
 
-    // Simulate successful login/signup
-    localStorage.setItem("gj_auth_token", "demo_token_" + Date.now());
-    localStorage.setItem("gj_remembered_email", formData.email);
-    localStorage.setItem(
-      "gj_user",
-      JSON.stringify({
-        name: formData.name || formData.email.split("@")[0],
-        email: formData.email,
-      })
-    );
+    try {
+      if (isLogin) {
+        // Login
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        });
 
-    setIsLoading(false);
-    setShowWelcome(true);
+        if (error) throw error;
 
-    // Redirect after showing welcome message
-    setTimeout(() => {
-      navigate("/");
-      toast({
-        title: isLogin ? "Welcome back!" : "Account created!",
-        description: "Your style journey continues...",
+        localStorage.setItem("gj_remembered_email", formData.email);
+        
+        toast({
+          title: "Welcome back!",
+          description: "Your style journey continues...",
+        });
+      } else {
+        // Sign up
+        const redirectUrl = `${window.location.origin}/`;
+        
+        const { data, error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            emailRedirectTo: redirectUrl,
+            data: {
+              full_name: formData.name,
+            },
+          },
+        });
+
+        if (error) throw error;
+
+        localStorage.setItem("gj_remembered_email", formData.email);
+        
+        toast({
+          title: "Account created!",
+          description: "Welcome to GJ Fashion.",
+        });
+      }
+    } catch (err: any) {
+      let errorMessage = "Something went wrong. Please try again.";
+      
+      if (err.message?.includes("Invalid login credentials")) {
+        errorMessage = "Invalid email or password.";
+      } else if (err.message?.includes("User already registered")) {
+        errorMessage = "This email is already registered. Please login instead.";
+      } else if (err.message?.includes("Password should be")) {
+        errorMessage = "Password should be at least 6 characters.";
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      setError(errorMessage);
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/`,
+        },
       });
-    }, 2000);
+      
+      if (error) throw error;
+    } catch (err: any) {
+      toast({
+        title: "Google login not configured",
+        description: "Please contact support to enable Google login.",
+        variant: "destructive",
+      });
+    }
   };
 
   if (showWelcome) {
@@ -96,7 +176,7 @@ const Auth = () => {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center animate-fade-in-up">
           <h1 className="font-heading text-4xl md:text-5xl text-foreground mb-4">
-            Welcome back to GJ Fashion ✨
+            Welcome to GJ Fashion ✨
           </h1>
           <p className="text-muted-foreground text-lg">
             Your style is waiting...
@@ -263,6 +343,7 @@ const Auth = () => {
             <Button
               type="button"
               variant="outline"
+              onClick={handleGoogleLogin}
               className="w-full h-12 rounded-xl gap-2 hover:bg-card transition-all duration-300"
             >
               <svg className="h-5 w-5" viewBox="0 0 24 24">
