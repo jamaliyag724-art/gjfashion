@@ -22,52 +22,39 @@ export interface ProductCardProps {
   sizes?: string[];
 }
 
-const ProductCard = ({ 
-  id, 
-  name, 
-  price, 
+const ProductCard = ({
+  id,
+  name,
+  price,
   originalPrice,
-  image, 
-  hoverImage,
-  delay = 0, 
-  rating = 4.5, 
-  badge, 
-  sizes: propSizes 
+  image,
+  rating,
+  propSizes,
 }: ProductCardProps) => {
   const navigate = useNavigate();
   const [showQuickView, setShowQuickView] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+
   const { toggleItem, isInWishlist } = useWishlist();
-
   const isWishlisted = isInWishlist(id);
-  const sizes = propSizes || ["XS", "S", "M", "L", "XL"];
-export function ProductCard({ product }: { product: Product }) {
-  const discountPercentage =
-    product.originalPrice && product.originalPrice > product.price
-      ? Math.round(
-          ((product.originalPrice - product.price) / product.originalPrice) * 100
-        )
-      : 0;
 
-  return (
-    <div className="relative">
-      {discountPercentage > 0 && (
-        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-          {discountPercentage}% OFF
-        </span>
-      )}
-      {/* rest of your card */}
-    </div>
-  );
-}
+  const sizes = propSizes || ["XS", "S", "M", "L", "XL"];
+
+  const discountPercentage =
+    originalPrice && originalPrice > price
+      ? Math.round(((originalPrice - price) / originalPrice) * 100)
+      : null;
+
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
     toggleItem({ id, name, price, image, rating });
   };
-
-  const handleAddToCart = () => {
+    const handleAddToCart = () => {
     if (!selectedSize) {
       toast({
         title: "Select a Size",
