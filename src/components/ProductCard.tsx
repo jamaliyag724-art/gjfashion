@@ -61,8 +61,10 @@ export function ProductCard({ product }: { product: Product }) {
     </div>
   );
 }
-
-  const discountPercentage = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : null;
+  const discountPercentage: number | null =
+  originalPrice && originalPrice > price
+    ? Math.round(((originalPrice - price) / originalPrice) * 100)
+    : null;
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
