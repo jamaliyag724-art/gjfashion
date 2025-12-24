@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Heart, Eye, ShoppingCart } from "lucide-react";
 import StarRating from "@/components/StarRating";
@@ -33,6 +34,7 @@ const ProductCard = ({
   badge, 
   sizes: propSizes 
 }: ProductCardProps) => {
+  const navigate = useNavigate();
   const [showQuickView, setShowQuickView] = useState(false);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -40,6 +42,11 @@ const ProductCard = ({
 
   const isWishlisted = isInWishlist(id);
   const sizes = propSizes || ["XS", "S", "M", "L", "XL"];
+  const discountPercentage = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : null;
+
+  const handleCardClick = () => {
+    navigate(`/product/${id}`);
+  };
   const discountPercentage = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : null;
 
   const handleWishlist = (e: React.MouseEvent) => {
@@ -74,6 +81,7 @@ const ProductCard = ({
         style={{ animationDelay: `${delay}ms` }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onClick={handleCardClick}
       >
         {/* Image Container */}
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
