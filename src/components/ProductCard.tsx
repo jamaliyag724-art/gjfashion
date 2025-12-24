@@ -42,11 +42,26 @@ const ProductCard = ({
 
   const isWishlisted = isInWishlist(id);
   const sizes = propSizes || ["XS", "S", "M", "L", "XL"];
-  const discountPercentage = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : null;
+export function ProductCard({ product }: { product: Product }) {
+  const discountPercentage =
+    product.originalPrice && product.originalPrice > product.price
+      ? Math.round(
+          ((product.originalPrice - product.price) / product.originalPrice) * 100
+        )
+      : 0;
 
-  const handleCardClick = () => {
-    navigate(`/product/${id}`);
-  };
+  return (
+    <div className="relative">
+      {discountPercentage > 0 && (
+        <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+          {discountPercentage}% OFF
+        </span>
+      )}
+      {/* rest of your card */}
+    </div>
+  );
+}
+
   const discountPercentage = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : null;
 
   const handleWishlist = (e: React.MouseEvent) => {
