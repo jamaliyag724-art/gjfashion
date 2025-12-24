@@ -9,6 +9,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { toast } from "@/hooks/use-toast";
 import { useWishlist } from "@/contexts/WishlistContext";
 
+const ANIMATION_DELAY = 150;
+setTimeout(() => {
+  setShowQuickView(true);
+}, ANIMATION_DELAY);
+
 export interface ProductCardProps {
   id: number;
   name: string;
