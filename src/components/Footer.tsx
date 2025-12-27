@@ -19,17 +19,17 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { name: "Shop All", href: "#products" },
-    { name: "New Arrivals", href: "#new-arrivals" },
-    { name: "Best Sellers", href: "#best-sellers" },
-    { name: "Trending", href: "#trending" },
+    { name: "Shop All", href: "/shop" },
+    { name: "New Arrivals", href: "/shop?category=new" },
+    { name: "Best Sellers", href: "/shop" },
+    { name: "Trending", href: "/shop" },
   ];
 
   const supportLinks = [
-    { name: "About Us", href: "#about" },
-    { name: "Contact", href: "#contact" },
-    { name: "Size Guide", href: "#" },
-    { name: "Shipping Info", href: "#" },
+    { name: "About Us", href: "/about" },
+    { name: "Contact", href: "/contact" },
+    { name: "FAQ", href: "/faq" },
+    { name: "Track Order", href: "/track-order" },
   ];
 
   return (

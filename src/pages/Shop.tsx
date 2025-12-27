@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { 
   allProducts, 
@@ -58,6 +59,12 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={`${title} - Premium Fashion Collection`}
+        description={`${description}. Shop high-quality ${activeCategory || 'fashion'} wear at GJ Fashion India. Free shipping on orders above ₹2999.`}
+        keywords={`${activeCategory || 'fashion'}, GJ Fashion, ${title.toLowerCase()}, buy online India, premium clothing`}
+        canonicalUrl={activeCategory ? `/shop?category=${activeCategory}` : "/shop"}
+      />
       <Navbar />
 
       {/* Breadcrumb */}

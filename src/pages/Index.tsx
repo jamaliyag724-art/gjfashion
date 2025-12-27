@@ -12,6 +12,7 @@ import ProductFilters from "@/components/ProductFilters";
 import CompleteLook from "@/components/CompleteLook";
 import HeroSection from "@/components/HeroSection";
 import TrustBadges from "@/components/TrustBadges";
+import SEOHead from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Users, ShoppingBag, Shirt, Briefcase, ArrowRight } from "lucide-react";
 
@@ -64,6 +65,12 @@ const Index = () => {
   
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Premium Men's & Women's Fashion India | Online Clothing Store"
+        description="Shop premium quality men's and women's fashion at GJ Fashion. Discover blazers, shirts, trousers, dresses & more. Free shipping across India on orders above ₹2999."
+        keywords="GJ Fashion, online fashion store India, men's clothing, women's clothing, premium fashion, blazers, shirts, trousers, dresses"
+        canonicalUrl="/"
+      />
       <Navbar />
 
       {/* Hero Section */}
